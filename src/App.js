@@ -1,8 +1,11 @@
+import Header from "./Layouts/Header";
+
 function App() {
   return (
-    <div className="max-w-3xl mx-auto bg-gray-700 w-screen h-screen">
-      <header></header>
-    </div>
+    <>
+      <Header />
+      <div className="max-w-3xl mx-auto w-screen h-screen"></div>
+    </>
   );
 }
 
