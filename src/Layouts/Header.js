@@ -1,3 +1,4 @@
+import IconButton from "../Components/IconButton";
 import ProfileImage from "../Components/ProfileImage";
 
 const Header = () => {
@@ -6,7 +7,11 @@ const Header = () => {
       <div className="max-w-7xl flex justify-around items-center mx-auto h-full">
         <ProfileImage />
         <p>search</p>
-        <p>create post</p>
+        <IconButton
+          color="green"
+          text="Post"
+          handler={() => console.log("post clicked")}
+        />
       </div>
     </header>
   );
