@@ -1,20 +1,22 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentUser } from "../Utils/reducer";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
-const UserDropdown = ({ user = "bigfootisreal" }) => {
-  const [showMenu, setShowMenu] = useState(false);
-  const [userProfile, setUserProfile] = useState("guest");
+const UserDropdown = ({ users }) => {
+  const dispatch = useDispatch();
 
-  const users = [
-    "guest",
-    "harrypoppins",
-    "tinfoilhat",
-    "bigfootisreal",
-    "badkarma",
-  ];
+  const guestUser = {
+    _id: -1,
+    username: "guest",
+    imageUrl: "https://robohash.org/guest",
+  };
+
+  const [showMenu, setShowMenu] = useState(false);
+  const [userProfile, setUserProfile] = useState(guestUser);
 
   function handleSelectUser(user) {
-    console.log("the user is now" + user);
+    dispatch(setCurrentUser(user._id));
     setUserProfile(user);
     setShowMenu(false);
   }
@@ -26,19 +28,26 @@ const UserDropdown = ({ user = "bigfootisreal" }) => {
         onClick={() => setShowMenu(true)}
         data-testid="user dropdown button"
       >
-        {userProfile} <RiArrowDropDownLine className="w-7 h-7" />
+        {userProfile.username}
+        <RiArrowDropDownLine className="w-7 h-7" />
       </button>
+
       {showMenu && (
-        <div class="absolute z-10  bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+        <div className="absolute z-10  bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
           <ul
-            class="py-1 text-sm text-gray-700 dark:text-gray-200"
+            className="py-1 text-sm text-gray-700 dark:text-gray-200"
             aria-labelledby="dropdownDefault"
           >
-            {users.map((user, i) => {
+            <li onClick={() => handleSelectUser(guestUser)}>
+              <p className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                guest
+              </p>
+            </li>
+            {users.map((user) => {
               return (
-                <li onClick={() => handleSelectUser(user)} key={i}>
-                  <p class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                    {user}
+                <li onClick={() => handleSelectUser(user)} key={user._id}>
+                  <p className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                    {user.username}
                   </p>
                 </li>
               );
