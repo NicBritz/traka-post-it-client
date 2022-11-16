@@ -49,7 +49,7 @@ const Posts = ({ users, currentUser }) => {
   return (
     <div className=" w-screen">
       <div className="w-screen h-[70vh] max-w-3xl mx-auto overflow-y-auto flex flex-col gap-3 p-6 mt-4 ">
-        {posts.map((post) => {
+        {posts?.map((post) => {
           return (
             <PostCard
               key={post._id}
