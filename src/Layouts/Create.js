@@ -28,7 +28,7 @@ const Create = ({ currentUser, updatePosts }) => {
       <form onSubmit={handleSubmit} className="flex gap-2 w-full items-center">
         <ProfileImage userProfile={currentUser} />
         <textarea
-          className="w-3/4 h-40 p-3 border rounded-md border-cyan-400"
+          className="w-3/4 h-40 p-3 border rounded-md border-cyan-400 dark:text-black"
           name="content"
           value={formContent}
           onChange={(e) => setFormContent(e.target.value)}

@@ -43,7 +43,7 @@ const UserDropdown = ({ users }) => {
                 guest
               </p>
             </li>
-            {users.map((user) => {
+            {users?.map((user) => {
               return (
                 <li onClick={() => handleSelectUser(user)} key={user._id}>
                   <p className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
