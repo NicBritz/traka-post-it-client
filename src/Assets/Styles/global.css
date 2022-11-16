@@ -5,7 +5,7 @@
 
 @layer base {
   body {
-    @apply max-w-7xl  bg-slate-100 text-black transition-colors ease-in-out duration-500;
+    @apply max-w-7xl  bg-neutral-100 text-black transition-colors ease-in-out duration-500;
     @apply dark:bg-gray-900 dark:text-white transition-colors ease-in-out duration-500;
   }
 }

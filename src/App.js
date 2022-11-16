@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import Header from "./Layouts/Header";
 import { useSelector } from "react-redux";
+import Create from "./Layouts/Create";
+import Header from "./Layouts/Header";
+import Posts from "./Layouts/Posts";
 
 function App() {
   const currentUserId = useSelector((state) => state.globalReducer.currentUser);
@@ -24,13 +26,17 @@ function App() {
     return;
   }, [users.length]);
 
+  function updated() {
+    return true;
+  }
+
   // sets the current user
   const currentUser = users?.filter((user) => user._id === currentUserId)[0];
 
   return (
     <>
       <Header users={users} currentUser={currentUser} />
-      <div className="max-w-3xl mx-auto w-screen h-screen"></div>
+      <Posts users={users} currentUser={currentUser} />
     </>
   );
 }

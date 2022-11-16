@@ -10,7 +10,7 @@ const Header = ({ users, currentUser }) => {
         <UserDropdown users={users} />
         <IconButton
           color="green"
-          text="Post"
+          text="post"
           handler={() => console.log("post clicked")}
         />
       </div>

@@ -24,13 +24,6 @@ it("checks the profile image in the header", () => {
   expect(profileImg).toHaveAttribute("alt", "guest profile");
 });
 
-it("checks the post button in the header", () => {
-  const postButton = screen.getByTestId("Post button");
-  expect(postButton).toBeInTheDocument();
-  expect(postButton).toHaveClass("text-green-500");
-  expect(postButton).toHaveAttribute("name", "Post button");
-});
-
 it("checks the user dropdown in the header", () => {
   const userDropdown = screen.getByTestId("user dropdown");
   const userDropdownButton = screen.getByTestId("user dropdown button");
