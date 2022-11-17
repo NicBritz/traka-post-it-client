@@ -31,7 +31,7 @@ const Create = ({ currentUser, updatePosts }) => {
       >
         <ProfileImage userProfile={currentUser} />
         <textarea
-          className="w-3/4 h-40 p-3 border rounded-md border-cyan-400 dark:text-black"
+          className="w-3/4 h-20 p-3 border rounded-md border-cyan-400 dark:text-black"
           name="content"
           value={formContent}
           onChange={(e) => setFormContent(e.target.value)}
