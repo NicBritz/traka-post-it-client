@@ -29,12 +29,17 @@ const Vote = ({ post }) => {
     setVotes(votes - 1);
   }
   return (
-    <div className=" text-blue-500 flex items-center gap-2">
-      <button onClick={addVote}>
+    <div
+      className=" text-blue-500 flex items-center gap-2"
+      data-testid="vote component"
+    >
+      <button onClick={addVote} name="add button">
         <MdAdd />
       </button>
-      <p className="text-blue-800 font-bold text-lg">{votes}</p>
-      <button onClick={removeVote}>
+      <p data-testid="votes" className="text-blue-800 font-bold text-lg">
+        {votes}
+      </p>
+      <button onClick={removeVote} name="subtract button">
         <MdRemove />
       </button>
     </div>
