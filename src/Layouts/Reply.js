@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ProfileImage from "../Components/ProfileImage";
 
-const Create = ({ currentUser, updatePosts }) => {
+const Reply = ({ currentUser, updatePosts, replyId }) => {
   const [formContent, setFormContent] = useState("");
 
   async function handleSubmit(e) {
@@ -9,6 +9,8 @@ const Create = ({ currentUser, updatePosts }) => {
     const post = {
       userId: currentUser._id,
       content: formContent,
+      isReply: true,
+      repliedToId: replyId,
     };
 
     await fetch(`https://traka-postit-server.onrender.com/api/posts/create`, {
@@ -35,14 +37,14 @@ const Create = ({ currentUser, updatePosts }) => {
           name="content"
           value={formContent}
           onChange={(e) => setFormContent(e.target.value)}
-          placeholder="Crete a post"
+          placeholder="Reply to post"
         ></textarea>
         <button className="px-6 py-3 max-h-12 bg-blue-600 hover:opacity-50 rounded-md text-white uppercase font-bold">
-          Send
+          Reply
         </button>
       </form>
     </div>
   );
 };
 
-export default Create;
+export default Reply;
