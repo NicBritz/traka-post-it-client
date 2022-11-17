@@ -8,11 +8,7 @@ const Header = ({ users, currentUser }) => {
       <div className="max-w-7xl flex justify-around items-center mx-auto h-full">
         <ProfileImage userProfile={currentUser} />
         <UserDropdown users={users} />
-        <IconButton
-          color="green"
-          text="post"
-          handler={() => console.log("post clicked")}
-        />
+        <IconButton color="green" text="post" />
       </div>
     </header>
   );
