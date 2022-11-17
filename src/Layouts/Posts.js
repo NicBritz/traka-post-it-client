@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import PostCard from "../Components/PostCard";
 import Create from "./Create";
 import Edit from "./Edit";
+import Reply from "./Reply";
 
 const Posts = ({ users, currentUser }) => {
   const [posts, setPosts] = useState([]);
@@ -52,10 +53,27 @@ const Posts = ({ users, currentUser }) => {
     setEditing(true);
   }
 
+  function renderReplies(pid) {
+    let rep = replies.filter((r) => r.repliedToId === pid);
+
+    let reps = rep.map((reply) => (
+      <PostCard
+        key={reply._id}
+        post={reply}
+        users={users}
+        currentUser={currentUser}
+        updatePosts={updatePosts}
+        handleEdit={handleEdit}
+        isReply={reply.isReply}
+      />
+    ));
+    return reps;
+  }
+
   return (
     <div className=" w-screen">
       <div className="w-screen h-[70vh] max-w-3xl mx-auto overflow-y-auto flex flex-col gap-3 p-6 mt-4 ">
-        {posts?.map((post) => {
+        {posts?.map((post, i) => {
           return (
             <div key={post._id}>
               <PostCard
@@ -67,25 +85,27 @@ const Posts = ({ users, currentUser }) => {
                 handleEdit={handleEdit}
               />
 
-              {replies.map((reply) => {
-                return (
-                  <>
-                    {reply.repliedToId === post._id ? (
-                      <PostCard
-                        key={reply._id}
-                        post={reply}
-                        users={users}
-                        currentUser={currentUser}
-                        updatePosts={updatePosts}
-                        handleEdit={handleEdit}
-                        isReply={reply.isReply}
-                      />
-                    ) : (
-                      <p>test</p>
-                    )}
-                  </>
-                );
-              })}
+              {renderReplies(post._id)}
+
+              {/* <div key={post._id + i}>
+                {replies.map((reply, i) => {
+                  return (
+                    <>
+                      {reply.repliedToId === post._id ? (
+                        <PostCard
+                          key={reply._id}
+                          post={reply}
+                          users={users}
+                          currentUser={currentUser}
+                          updatePosts={updatePosts}
+                          handleEdit={handleEdit}
+                          isReply={reply.isReply}
+                        />
+                      ) : null}
+                    </>
+                  );
+                })}
+              </div> */}
             </div>
           );
         })}
