@@ -5,6 +5,7 @@ import Edit from "./Edit";
 
 const Posts = ({ users, currentUser }) => {
   const [posts, setPosts] = useState([]);
+  const [replies, setReplies] = useState([]);
   const [editing, setEditing] = useState(false);
   const [editId, setEditId] = useState("");
 
@@ -19,6 +20,11 @@ const Posts = ({ users, currentUser }) => {
       }
 
       const posts = await response.json();
+      const replies = posts.filter((post) => {
+        return post.isReply === true;
+      });
+
+      setReplies(replies);
       setPosts(posts);
     }
 
@@ -51,14 +57,36 @@ const Posts = ({ users, currentUser }) => {
       <div className="w-screen h-[70vh] max-w-3xl mx-auto overflow-y-auto flex flex-col gap-3 p-6 mt-4 ">
         {posts?.map((post) => {
           return (
-            <PostCard
-              key={post._id}
-              post={post}
-              users={users}
-              currentUser={currentUser}
-              updatePosts={updatePosts}
-              handleEdit={handleEdit}
-            />
+            <div key={post._id}>
+              <PostCard
+                key={post._id}
+                post={post}
+                users={users}
+                currentUser={currentUser}
+                updatePosts={updatePosts}
+                handleEdit={handleEdit}
+              />
+
+              {replies.map((reply) => {
+                return (
+                  <>
+                    {reply.repliedToId === post._id ? (
+                      <PostCard
+                        key={reply._id}
+                        post={reply}
+                        users={users}
+                        currentUser={currentUser}
+                        updatePosts={updatePosts}
+                        handleEdit={handleEdit}
+                        isReply={reply.isReply}
+                      />
+                    ) : (
+                      <p>test</p>
+                    )}
+                  </>
+                );
+              })}
+            </div>
           );
         })}
       </div>
